@@ -5,7 +5,9 @@ import 'acc.dart';
 import '../models/db.dart';
 import '../services/db_helper.dart';
 import '../services/location_helper.dart';
-import 'inputimg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeScreen extends StatefulWidget {
   final Users? user;
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String? lat, long, country, adminArea;
   List<TextEditingController> contactControllers = [];
+  final mail = FirebaseAuth.instance.currentUser!;
   final _formKey = GlobalKey<FormState>();
     final usernameCtrlr = TextEditingController();
     final passwordCtrlr = TextEditingController();
@@ -42,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Scaffold(
       
-      backgroundColor: const Color.fromARGB(255, 248, 213, 246),
+      backgroundColor: Color.fromARGB(255, 233, 167, 225),
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         shadowColor: const Color.fromARGB(255, 229, 12, 120),
@@ -53,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _formKey,
         child: Stack(
           children: <Widget>[
-            Container(
+           /* Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   //image: AssetImage("assets/images/flower.jpeg"),
@@ -62,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
+            ),*/
             SingleChildScrollView(
               child: Container(
                 //color: const Color.fromARGB(255, 248, 213, 246),
@@ -74,13 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextField(
                         controller: usernameCtrlr,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                          border: UnderlineInputBorder(),
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 20.0),
-                        ),
+                        decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey.shade400),
+                            ),
+                            fillColor: Colors.grey.shade200,
+                            filled: true,
+                            hintText: 'Username',
+                            hintStyle: TextStyle(color: Colors.grey[500])),
                       ),
                       const SizedBox(height: 16.0),
                       /*const TextField(
@@ -96,13 +103,17 @@ class _HomeScreenState extends State<HomeScreen> {
            ),*/
                       FancyPasswordField(
                         controller: passwordCtrlr,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
-                          border: UnderlineInputBorder(),
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 20.0),
-                        ),
+                        decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey.shade400),
+                            ),
+                            fillColor: Colors.grey.shade200,
+                            filled: true,
+                            hintText: 'Password',
+                            hintStyle: TextStyle(color: Colors.grey[500])),
                         validationRules: {
                           DigitValidationRule(),
                           UppercaseValidationRule(),
@@ -225,13 +236,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           for (var i = 0; i < contactControllers.length; i++)
                             FancyPasswordField(
                               controller: contactControllers[i],
-                              decoration: InputDecoration(
-                                labelText: 'Contact ${i + 1}',
-                                border: UnderlineInputBorder(),
-                                labelStyle: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 20.0),
-                              ),
+                                decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey.shade400),
+                                    ),
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true,
+                                    hintText: 'Contact ${i + 1}',
+                                    hintStyle: TextStyle(color: Colors.grey[500])),
+
                                validationRules: {
                             DigitValidationRule(),
                             MinCharactersValidationRule(10),
@@ -380,6 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (widget.user == null) {
                             if (contact2=="0" && contact3!="0") {
                               final Users model = Users(
+                                  email:mail.email,
                                   username: username,
                                   password: password,
                                   contact1: contact1,
@@ -393,6 +410,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             } else if (contact3=="0" &&
                                 contact2!="0") {
                               final Users model = Users(
+                                  email:mail.email,
                                   username: username,
                                   password: password,
                                   contact1: contact1,
@@ -405,6 +423,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               await DatabaseHelper.addUser(model);
                             } else if (contact2=="0" && contact3=="0") {
                               final Users model = Users(
+                                  email:mail.email,
                                   username: username,
                                   password: password,
                                   contact1: contact1,
@@ -418,6 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             } else if (contact2!="0" &&
                                 contact3!="0") {
                               final Users model = Users(
+                                  email:mail.email,
                                   username: username,
                                   password: password,
                                   contact1: contact1,

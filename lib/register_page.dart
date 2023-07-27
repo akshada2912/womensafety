@@ -405,6 +405,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (widget.user == null) {
                       if (contact2 == "0" && contact3 != "0") {
                         final Users model = Users(
+                            email:"0",
                             username: username,
                             password: password,
                             contact1: contact1,
@@ -417,6 +418,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         await DatabaseHelper.addUser(model);
                       } else if (contact3 == "0" && contact2 != "0") {
                         final Users model = Users(
+                            email:"0",
                             username: username,
                             password: password,
                             contact1: contact1,
@@ -429,6 +431,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         await DatabaseHelper.addUser(model);
                       } else if (contact2 == "0" && contact3 == "0") {
                         final Users model = Users(
+                            email:"0",
                             username: username,
                             password: password,
                             contact1: contact1,
@@ -441,6 +444,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         await DatabaseHelper.addUser(model);
                       } else if (contact2 != "0" && contact3 != "0") {
                         final Users model = Users(
+                            email:"0",
                             username: username,
                             password: password,
                             contact1: contact1,

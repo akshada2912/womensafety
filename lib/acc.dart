@@ -11,10 +11,20 @@ import 'inputimg.dart';
 import 'button.dart';
 import 'location.dart';
 import 'login_or_register_page.dart';
+import 'auth_service.dart';
 
 Future<String> getUsername() async {
   final lst = await DatabaseHelper.getData();
   return lst[0];
+}
+
+Future<String> getEmail() async {
+  final lst = await DatabaseHelper.getData();
+  if (lst[5] == "0") {
+    return "-";
+  } else {
+    return lst[5];
+  }
 }
 
 Future<String> getPasswordEdit() async {
@@ -94,6 +104,12 @@ class _AccountPageState extends State<AccountPage> {
         actions: [
           TextButton.icon(
             onPressed: () async {
+              var x=await getEmail();
+              if(x!="-")
+                {
+
+                  AuthService().signOut();
+                }
               await DatabaseHelper.unCurr();
               await Future.delayed(const Duration(seconds: 1));
               if (context.mounted) {
@@ -259,12 +275,28 @@ class _AccountPageState extends State<AccountPage> {
                                         Padding(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 20),
-                                          child: Text(
-                                            '123456789',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
+                                          child: FutureBuilder<String>(
+                                            future: getEmail(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<String>
+                                                snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return CircularProgressIndicator();
+                                              } else if (snapshot.hasError) {
+                                                return Text(
+                                                    'Error: ${snapshot.error}');
+                                              } else {
+                                                return Text(
+                                                  snapshot.data!,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                      FontWeight.bold),
+                                                  textAlign: TextAlign.center,
+                                                );
+                                              }
+                                            },
                                           ),
                                         ),
                                       ],

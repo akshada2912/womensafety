@@ -117,13 +117,17 @@ class _EditPageState extends State<EditPage> {
               TextField(
               controller: usernameCtrlr,
 
-              decoration: const InputDecoration(
-                labelText: 'Username',
-                border: UnderlineInputBorder(),
-                labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20.0),
-                
-              ),
+              decoration: InputDecoration(
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            fillColor: Colors.grey.shade200,
+            filled: true,
+            hintText: 'Username',
+            hintStyle: TextStyle(color: Colors.grey[500])),
             ),
             const SizedBox(height: 16.0),
            /*const TextField(
@@ -139,12 +143,17 @@ class _EditPageState extends State<EditPage> {
            ),*/
              FancyPasswordField(
                controller: passwordCtrlr,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: UnderlineInputBorder(),
-                labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20.0),
-                ),
+              decoration: InputDecoration(
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            fillColor: Colors.grey.shade200,
+            filled: true,
+            hintText: 'Password',
+            hintStyle: TextStyle(color: Colors.grey[500])),
                 validationRules: {
                     DigitValidationRule(),
                     UppercaseValidationRule(),
@@ -203,42 +212,200 @@ class _EditPageState extends State<EditPage> {
               ),
            
             const SizedBox(height: 16.0),
-             TextField(
-               controller: contact1Ctrlr,
-              decoration:const InputDecoration(
-                labelText: 'First Contact',
-                border: UnderlineInputBorder(),
-                labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20.0),
-
-              ),
-              obscureText: true,
-            ),
+             FancyPasswordField(
+                      controller: contact1Ctrlr,
+                      decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          hintText: 'First Contact',
+                          hintStyle: TextStyle(color: Colors.grey[500])),
+                      validationRules: {
+                        DigitValidationRule(),
+                        MinCharactersValidationRule(10),
+                        MaxCharactersValidationRule(10),
+                      },
+                      strengthIndicatorBuilder: (strength) => Text(
+                            strength.toString(),
+                          ),
+                      validationRuleBuilder: (rules, value) {
+                        if (value.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
+                        return ListView(
+                          shrinkWrap: true,
+                          children: rules
+                              .map(
+                                (rule) => rule.validate(value)
+                                    ? Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.close,
+                                            color: Colors.red,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              )
+                              .toList(),
+                        );
+                      }),
             const SizedBox(height: 16.0),
-             TextField(
-              controller: contact2Ctrlr,
-              decoration: const InputDecoration(
-                labelText: 'Second Contact',
-                border: UnderlineInputBorder(),
-                labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20.0),
-              ),
-              obscureText: true,
-            ),
+             FancyPasswordField(
+                      controller: contact2Ctrlr,
+                      decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          hintText: 'Second Contact',
+                          hintStyle: TextStyle(color: Colors.grey[500])),
+                      validationRules: {
+                        DigitValidationRule(),
+                        MinCharactersValidationRule(10),
+                        MaxCharactersValidationRule(10),
+                      },
+                      strengthIndicatorBuilder: (strength) => Text(
+                            strength.toString(),
+                          ),
+                      validationRuleBuilder: (rules, value) {
+                        if (value.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
+                        return ListView(
+                          shrinkWrap: true,
+                          children: rules
+                              .map(
+                                (rule) => rule.validate(value)
+                                    ? Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.close,
+                                            color: Colors.red,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              )
+                              .toList(),
+                        );
+                      }),
             const SizedBox(height: 16.0,),
-             TextField(
-              controller: contact3Ctrlr,
-              decoration: const InputDecoration(
-                labelText: 'Third Contact',
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white,width:1.0),
-                ),
-                labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20.0),
-              ),
-              //OutlineInputBorder: const BorderSide(color: Colors.grey, width: 0.0),
-              obscureText: true,
-            ),
+             FancyPasswordField(
+                      controller: contact3Ctrlr,
+                      decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          hintText: 'Tihrd Contact',
+                          hintStyle: TextStyle(color: Colors.grey[500])),
+                      validationRules: {
+                        DigitValidationRule(),
+                        MinCharactersValidationRule(10),
+                        MaxCharactersValidationRule(10),
+                      },
+                      strengthIndicatorBuilder: (strength) => Text(
+                            strength.toString(),
+                          ),
+                      validationRuleBuilder: (rules, value) {
+                        if (value.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
+                        return ListView(
+                          shrinkWrap: true,
+                          children: rules
+                              .map(
+                                (rule) => rule.validate(value)
+                                    ? Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.close,
+                                            color: Colors.red,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            rule.name,
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              )
+                              .toList(),
+                        );
+                      }),
             const SizedBox(height: 16.0),
 
 
