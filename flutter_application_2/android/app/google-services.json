@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "15059757657",
+    "project_id": "she-guard",
+    "storage_bucket": "she-guard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15059757657:android:54b326f0074e11164c5f48",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15059757657-pi225dr8qu9u0mtnvdl6moikuvtciuac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBetEW4YujtWZtYJbjNMcBBDpVdrS2ap8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15059757657-0b99cftimk19ngnc1ibki16bee94bjuu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
